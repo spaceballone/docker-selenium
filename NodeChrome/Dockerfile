@@ -30,7 +30,6 @@ RUN wget --no-verbose -O /tmp/chromedriver_linux64.zip http://chromedriver.stora
 # Selenium Configuration
 #========================
 COPY config.json /opt/selenium/config.json
-RUN sed -i "s/\"port\": 5555/\"port\": $PORT/" /opt/selenium/config.json
 
 #=================================
 # Chrome Launch Script Modication
@@ -42,5 +41,6 @@ RUN chmod +x /opt/google/chrome/google-chrome
 # Hack to get the remote host variable set correctly
 #=================================
 RUN sed -i '2iexport REMOTE_HOST=$HOST' /opt/bin/entry_point.sh
+RUN sed -i '2ised -i "s/\\"port\\": 5555/\\"port\\": $PORT/" /opt/selenium/config.json' /opt/bin/entry_point.sh
 
 USER seluser
