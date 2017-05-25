@@ -30,6 +30,7 @@ RUN wget --no-verbose -O /tmp/chromedriver_linux64.zip http://chromedriver.stora
 # Selenium Configuration
 #========================
 COPY config.json /opt/selenium/config.json
+RUN sed -i "s/\"port\": 5555/\"port\": $PORT/" /opt/selenium/config.json
 
 #=================================
 # Chrome Launch Script Modication
